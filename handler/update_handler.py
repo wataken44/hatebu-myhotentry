@@ -29,16 +29,8 @@ class UpdateHandler(webapp2.RequestHandler):
         browser["password"] = password
         browser.submit()
 
-        # html
-        browser.open("http://b.hatena.ne.jp/%s/" % id)
-        html = browser.response().read()
-        
-        soup = BeautifulSoup(html)
-        link = soup.html.head.find('link', attrs={"rel":"alternate"})
-        href = link["href"]
-
         # rss
-        browser.open(href)
+        browser.open("http://b.hatena.ne.jp/%s/hotentry.rss" % id)
         rss = browser.response().read()
 
         # write to file

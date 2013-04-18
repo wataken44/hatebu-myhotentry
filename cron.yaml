@@ -1,0 +1,4 @@
+cron:
+- description: periodical update
+  url: /update
+  schedule: every 45 minutes

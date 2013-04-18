@@ -12,6 +12,8 @@ from model.file_model import FileModel
 
 class RssHandler(webapp2.RequestHandler):
     def get(self):
+        self.response.headers["Content-Type"] = "application/xml"
+
         rss = FileModel.read("rss::myhotentry_rss")
         if rss is None:
             rss = ""

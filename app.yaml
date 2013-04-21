@@ -10,3 +10,7 @@ handlers:
   script: main.application
 - url: /.*
   script: main.application
+
+libraries:
+- name: django
+  version: "1.4"

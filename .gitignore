@@ -1,5 +1,6 @@
 # application specific ignore
 config.json
+app.yaml
 
 # python general ignore
 *.py[cod]
@@ -38,5 +39,3 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
-
-

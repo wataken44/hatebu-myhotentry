@@ -53,14 +53,26 @@ class UpdateHandler(webapp2.RequestHandler):
         for entry in rss.entries:
             content = entry.content[0]["value"]
             published = datetime.fromtimestamp(mktime(entry.updated_parsed))
-            EntryModel.get_or_insert_by_link(
+            title = entry.title
+            if title is None or title == "":
+                title = entry.link
+
+            em = EntryModel.get_or_insert_by_link(
                 entry.link,
                 link=entry.link, 
                 content=content,
                 description=entry.description,
                 published=published,
-                title=entry.title
+                title=title
                 )
+            # update model
+            em.link = entry.link
+            em.content = em.content
+            em.description = entry.description
+            em.published = published
+            em.title = title
+            em.put()
+
 
     def _update_rss(self):
         host = os.environ['HTTP_HOST']

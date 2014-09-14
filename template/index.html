@@ -3,9 +3,12 @@
 <head>
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
   <link rel="stylesheet" href="static/custom.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{{id}}のmy hotentry</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="1200">
+
+  <title>{{id}}のマイホットエントリ</title>
 </head>
 
 <body>
@@ -14,7 +17,7 @@
     <div class="header">
       <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <ul>
-          <li>{{id}}のmy hotentry</li>
+          <li>{{id}}のマイホットエントリ</li>
           <li><a href="/rss">rss</a></li>
           <li><a href="http://b.hatena.ne.jp/{{id}}">{{id}}のbookmark</a></li>
           <li><a href="https://github.com/wataken44/hatebu-myhotentry">source of this site</a></li>
@@ -24,10 +27,10 @@
     </div>
 
     <div class="content">
-      {% for link in links %}
+      {% for entry in entries %}
       <div class="pure-g">
         <div class="pure-u-1 link">
-          <a href="{{link["href"]}}">{{link["title"]}}</a>
+          <a href="{{entry["link"]}}">{{entry["title"]}}</a>
         </div>
       </div>
       {% endfor %}

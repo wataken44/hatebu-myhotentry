@@ -10,13 +10,13 @@
     padding-left: 1ex;
     padding-right: 1ex;
     text-decoration: none;
-    color: #006666;
+    color: #000088;
 }
 
 .content .pure-g:nth-child(even) {
-    background-color: #f8fff8;
+    background-color: #f8f8ff;
 }
 
 .link a:hover {
-    background-color: #e0ffe0;
+    background-color: #e0e0ff;
 }

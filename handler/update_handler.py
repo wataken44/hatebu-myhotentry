@@ -24,10 +24,24 @@ from model.file_model import FileModel
 from model.entry_model import EntryModel
 
 class UpdateHandler(webapp2.RequestHandler):
-    def get(self):
+    def get(self, command):
+        if command == "fetch":
+            self._fetch()
+        elif command == "generate":
+            self._generate()
+        elif command == "clean":
+            self._clean()
+
+    def _fetch(self):
         rss = self._get_rss()
         self._parse_and_write_entry(rss)
-        self._update_rss()
+
+    def _generate(self):
+        entries = self._read_entries()
+        self._update_rss(entries)
+        self._update_json(entries)
+
+    def _clean(self):
         self._cleanup_entry()
 
     def _get_rss(self):
@@ -73,8 +87,13 @@ class UpdateHandler(webapp2.RequestHandler):
             em.title = title
             em.put()
 
+    def _read_entries(self):
+        query = EntryModel.all()
+        query.order("-created")
+        entries = query.fetch(limit=200)
+        return entries
 
-    def _update_rss(self):
+    def _update_rss(self, entries):
         host = os.environ['HTTP_HOST']
         if host.find('127.0.0.1') >= 0:
             host = host.replace('127.0.0.1', 'localhost')
@@ -93,10 +112,6 @@ class UpdateHandler(webapp2.RequestHandler):
             description = feed_description,
             language = u"ja")
 
-        query = EntryModel.all()
-        query.order("-created")
-        entries = query.fetch(limit=120)
-
         for entry in entries:
             feed.add_item(
                 title = entry.title,
@@ -106,6 +121,15 @@ class UpdateHandler(webapp2.RequestHandler):
                 pubdate = entry.published)
 
         FileModel.write("rss::myhotentry_rss", feed.writeString('utf-8'))
+
+    def _update_json(self, entries):
+        js = []
+        for entry in entries:
+            js.append({
+                "title": entry.title,
+                "link": entry.link
+            })
+        FileModel.write("json::myhotentry_rss", js)
 
     def _cleanup_entry(self):
         old = date.today() - timedelta(3)

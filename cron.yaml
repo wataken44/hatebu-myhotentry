@@ -1,4 +1,10 @@
 cron:
-- description: periodical update
-  url: /update
+- description: periodical fetch
+  url: /update/fetch
   schedule: every 45 minutes
+- description: periodical generate
+  url: /update/generate
+  schedule: every 45 minutes
+- description: periodical cleanup
+  url: /update/clean
+  schedule: every 3 hours

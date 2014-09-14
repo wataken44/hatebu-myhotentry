@@ -23,5 +23,5 @@ load_config()
 application = webapp2.WSGIApplication([
         ('/rss', RssHandler),
         ('/', IndexHandler),
-        ('/update', UpdateHandler)
+        ('^/update/(.*)$', UpdateHandler),
         ])

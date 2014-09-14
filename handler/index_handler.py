@@ -10,23 +10,18 @@ import webapp2
 
 from config import get_config
 from handler.base_handler import BaseHandler
+from model.file_model import FileModel
 
 class IndexHandler(BaseHandler):
     def get(self):
         id = get_config()["id"]
+        entries = FileModel.read("json::myhotentry_rss")
+        if entries == None:
+            entries = []
 
         context = {
             "id": id,
-            "links": [
-                {
-                    "href": "http://www.goo.ne.jp/",
-                    "title": "goo"
-                },
-                {
-                    "href": "http://www.yahoo.co.jp/",
-                    "title": "yahoo"
-                },
-            ]
+            "entries": entries
         }
 
         self.response.out.write(self._render('index.html', context))

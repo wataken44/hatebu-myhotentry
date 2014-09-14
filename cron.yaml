@@ -4,7 +4,7 @@ cron:
   schedule: every 45 minutes
 - description: periodical generate
   url: /update/generate
-  schedule: every 45 minutes
+  schedule: every 40 minutes
 - description: periodical cleanup
   url: /update/clean
   schedule: every 3 hours

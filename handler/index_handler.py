@@ -7,24 +7,29 @@
 """
 
 import webapp2
-from config import get_config
 
-class IndexHandler(webapp2.RequestHandler):
+from config import get_config
+from handler.base_handler import BaseHandler
+
+class IndexHandler(BaseHandler):
     def get(self):
         id = get_config()["id"]
 
-        self.response.out.write("""
-<!DOCTYPE html>
-<html>
-<body>
-<ul>
-<li><a href="/rss">rss<a></li>
-<li><a href="http://b.hatena.ne.jp/%s">%s's bookmark</a></li>
-<li><a href="https://github.com/wataken44/hatebu-myhotentry">source of this site</a></li>
-<li><a href="http://twitter.com/wataken44">@wataken44</a></li>
-</body>
-</html>
-""" % (id, id))
+        context = {
+            "id": id,
+            "links": [
+                {
+                    "href": "http://www.goo.ne.jp/",
+                    "title": "goo"
+                },
+                {
+                    "href": "http://www.yahoo.co.jp/",
+                    "title": "yahoo"
+                },
+            ]
+        }
+
+        self.response.out.write(self._render('index.html', context))
                                 
     def head(self):
         pass

@@ -1,0 +1,22 @@
+.base {
+    padding: 0% 5% 0% 5%;
+}
+
+.link {
+}
+
+.link a {
+    display: block;
+    padding-left: 1ex;
+    padding-right: 1ex;
+    text-decoration: none;
+    color: #006666;
+}
+
+.content .pure-g:nth-child(even) {
+    background-color: #f8fff8;
+}
+
+.link a:hover {
+    background-color: #e0ffe0;
+}

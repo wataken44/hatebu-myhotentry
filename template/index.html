@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+  <link rel="stylesheet" href="static/custom.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{id}}のmy hotentry</title>
+</head>
+
+<body>
+
+  <div class="base">
+    <div class="header">
+      <div class="pure-menu pure-menu-open pure-menu-horizontal">
+        <ul>
+          <li>{{id}}のmy hotentry</li>
+          <li><a href="/rss">rss</a></li>
+          <li><a href="http://b.hatena.ne.jp/{{id}}">{{id}}のbookmark</a></li>
+          <li><a href="https://github.com/wataken44/hatebu-myhotentry">source of this site</a></li>
+          <li><a href="http://twitter.com/wataken44">@wataken44</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content">
+      {% for link in links %}
+      <div class="pure-g">
+        <div class="pure-u-1 link">
+          <a href="{{link["href"]}}">{{link["title"]}}</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>

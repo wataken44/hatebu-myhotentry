@@ -5,6 +5,8 @@ api_version: 1
 threadsafe: true
 
 handlers:
+- url: /static
+  static_dir: static
 - url: /update
   login: admin
   script: main.application
@@ -14,3 +16,7 @@ handlers:
 libraries:
 - name: django
   version: "1.4"
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest

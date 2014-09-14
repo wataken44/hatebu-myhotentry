@@ -15,8 +15,6 @@ class BaseHandler(webapp2.RequestHandler):
     def __init__(self, *args, **kwargs):
         webapp2.RequestHandler.__init__(self, *args, **kwargs)
 
-        print(util.get_abspath("template"))
-
         self.__env = jinja2.Environment(
             loader=jinja2.FileSystemLoader(util.get_abspath("template")),
             extensions=['jinja2.ext.autoescape'],

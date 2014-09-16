@@ -3,6 +3,7 @@
 }
 
 .link {
+    word-wrap: break-word;
 }
 
 .link a {
